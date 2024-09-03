@@ -143,6 +143,11 @@ export default {
           title: "Phone",
           text: "phones",
         },
+        {
+          id: 6,
+          title: "Email",
+          text: "email",
+        },
       ],
     };
   },
@@ -163,6 +168,7 @@ export default {
 
   async mounted() {
     await this.fetchShelter(this.$route.params.id);
+    console.log(this.getShelter);
     let data = {
       countries: [this.getShelter.country],
       types: this.getShelter.types,
@@ -269,6 +275,7 @@ export default {
       line-height: 30px;
 
       color: #444;
+      white-space: pre-wrap;
     }
   }
 

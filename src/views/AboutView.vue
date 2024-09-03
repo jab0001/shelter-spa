@@ -1,105 +1,107 @@
 <template>
-  <div class="about">
-    <h2 class="about__title">About HelpShelter</h2>
-    <img
-      :src="mobile ? './images/dogs-mobile.png' : './images/dogs.png'"
-      alt=""
-      class="about__img"
-    />
-    <DonationBlock class="about__donation" />
-    <DeserveBlock />
-    <WorkBlock />
+  <div>
+    <div class="about">
+      <h2 class="about__title">About HelpShelter</h2>
+      <img
+        :src="mobile ? './images/dogs-mobile.png' : './images/dogs.png'"
+        alt=""
+        class="about__img"
+      />
+      <DonationBlock class="about__donation" />
+      <DeserveBlock />
+      <WorkBlock />
 
-    <div class="about__reasons__wrapper">
-      <ul class="about__reasons__list">
-        <li>
-          <div class="about__reasons__list__digit">1</div>
-          <h4 class="about__reasons__list__title">
-            Why is it important to help shelters?
-          </h4>
-          <div class="about__reasons__list__info__wrapper">
-            <div>
-              <p class="about__reasons__list__info">
-                We believe that helping animal shelters is crucial. There are
-                many homeless animals in the world that need love, attention,
-                and care.
-              </p>
-              <p class="about__reasons__list__info">
-                By donating to a shelter, you can make a significant impact on
-                an animal's life. We encourage everyone to take the time to
-                browse through our app, find a shelter that speaks to you, and
-                make a donation
-              </p>
+      <div class="about__reasons__wrapper">
+        <ul class="about__reasons__list">
+          <li>
+            <div class="about__reasons__list__digit">1</div>
+            <h4 class="about__reasons__list__title">
+              Why is it important to help shelters?
+            </h4>
+            <div class="about__reasons__list__info__wrapper">
+              <div>
+                <p class="about__reasons__list__info">
+                  We believe that helping animal shelters is crucial. There are
+                  many homeless animals in the world that need love, attention,
+                  and care.
+                </p>
+                <p class="about__reasons__list__info">
+                  By donating to a shelter, you can make a significant impact on
+                  an animal's life. We encourage everyone to take the time to
+                  browse through our app, find a shelter that speaks to you, and
+                  make a donation
+                </p>
+              </div>
+              <LinkBtn
+                link="shelters"
+                title="Find a shelter"
+                class="about__reasons__list__btn"
+              />
             </div>
-            <LinkBtn
-              link="shelters"
-              title="Find a shelter"
-              class="about__reasons__list__btn"
-            />
-          </div>
-        </li>
-        <li>
-          <div class="about__reasons__list__digit">2</div>
-          <h4 class="about__reasons__list__title">We remind you</h4>
-          <div class="about__reasons__list__info__wrapper">
-            <div>
-              <p class="about__reasons__list__info">
-                Supporting animal shelters is important, but it is only a
-                band-aid solution to the problem of pet overpopulation.
-              </p>
-              <p class="about__reasons__list__info">
-                To make a real difference, it is vital to educate people about
-                the importance of neutering their pets and the responsibility
-                that comes with adopting a pet.
-              </p>
-              <p class="about__reasons__list__info">
-                Educating people can prevent more unwanted animals from being
-                born and reduce the number of animals in shelters in the long
-                term.
-              </p>
-              <p class="about__reasons__list__info">
-                That's why we encourage you to check out the information
-                provided by the international organization PETA.
-              </p>
+          </li>
+          <li>
+            <div class="about__reasons__list__digit">2</div>
+            <h4 class="about__reasons__list__title">We remind you</h4>
+            <div class="about__reasons__list__info__wrapper">
+              <div>
+                <p class="about__reasons__list__info">
+                  Supporting animal shelters is important, but it is only a
+                  band-aid solution to the problem of pet overpopulation.
+                </p>
+                <p class="about__reasons__list__info">
+                  To make a real difference, it is vital to educate people about
+                  the importance of neutering their pets and the responsibility
+                  that comes with adopting a pet.
+                </p>
+                <p class="about__reasons__list__info">
+                  Educating people can prevent more unwanted animals from being
+                  born and reduce the number of animals in shelters in the long
+                  term.
+                </p>
+                <p class="about__reasons__list__info">
+                  That's why we encourage you to check out the information
+                  provided by the international organization PETA.
+                </p>
+              </div>
+              <LinkBtn
+                link="get-in-touch"
+                title="Learn more"
+                class="about__reasons__list__btn"
+              />
             </div>
-            <LinkBtn
-              link="get-in-touch"
-              title="Learn more"
-              class="about__reasons__list__btn"
-            />
-          </div>
-        </li>
-      </ul>
-      <div class="about__reasons__motto">
-        <h3>Let's work together to create a world</h3>
-        <h3>where every animal is wanted and loved</h3>
+          </li>
+        </ul>
+        <div class="about__reasons__motto">
+          <h3>Let's work together to create a world</h3>
+          <h3>where every animal is wanted and loved</h3>
+        </div>
+      </div>
+
+      <OurTeam class="support__team" />
+
+      <div class="about__help-us">
+        <h3 class="about__help-us__title">How can you help us?</h3>
+        <div class="about__help-us__info">
+          <p class="about__help-us__info__text">
+            You can help us achieve our mission by making a donation to our app.
+            Your contribution will go towards the maintenance and improvement of
+            our platform. Together, we can make a difference in the lives of
+            animals.
+          </p>
+          <LinkBtn
+            link="donate"
+            title="Donate us"
+            class="about__help-us__info__btn"
+          />
+        </div>
+        <a href=""> <p class="about__help-us__link">Learn more ↗</p> </a>
       </div>
     </div>
-
-    <OurTeam class="support__team" />
-
-    <div class="about__help-us">
-      <h3 class="about__help-us__title">How can you help us?</h3>
-      <div class="about__help-us__info">
-        <p class="about__help-us__info__text">
-          You can help us achieve our mission by making a donation to our app.
-          Your contribution will go towards the maintenance and improvement of
-          our platform. Together, we can make a difference in the lives of
-          animals.
-        </p>
-        <LinkBtn
-          link="donate"
-          title="Donate us"
-          class="about__help-us__info__btn"
-        />
-      </div>
-      <a href=""> <p class="about__help-us__link">Learn more ↗</p> </a>
-    </div>
-
     <ContactUs
       title="If you have any questions or concerns, please feel free to reach out to us. We are always happy to help"
       btnText="Get in touch"
       link="get-in-touch"
+      class="about__contact"
     />
   </div>
 </template>
@@ -146,7 +148,14 @@ export default {
   max-width: 1400px;
   margin: 0 auto;
   margin-top: 120px;
-  margin-bottom: 200px;
+
+  &__contact {
+    margin-bottom: 200px;
+
+    @media (max-width: 900px) {
+      margin-bottom: 100px;
+    }
+  }
 
   &__donation {
     margin-top: 77px;
@@ -218,6 +227,7 @@ export default {
         &__wrapper {
           display: flex;
           flex-direction: row;
+          flex-wrap: wrap;
         }
       }
 
@@ -383,6 +393,10 @@ export default {
 
       &__link {
         text-align: center;
+        
+        @media (max-width: 900px) {
+          display: none;
+        }
       }
 
       &__info {

@@ -371,11 +371,17 @@ export default {
     line-height: 27px;
 
     width: 90%;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__img {
-    width: 100%;
-    height: auto;
+    max-width: 100%;
+    max-height: auto;
 
     &-wrapper {
       margin-top: 20px;
@@ -388,6 +394,7 @@ export default {
     left: 31px;
     position: absolute;
     display: flex;
+    max-width: 50%;
   }
 
   &__item {

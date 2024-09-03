@@ -48,7 +48,7 @@ export default {
   display: flex;
   justify-content: center;
 
-  &-shelters {
+  &-shelters, &-about {
     border-top: 1px solid #272727;
   }
 
@@ -58,11 +58,11 @@ export default {
     margin: 0 auto;
   }
 
-  &-about {
-    border-top: 1px solid #272727;
-    min-width: 1920px;
-    margin-left: -260px;
-  }
+  // &-about {
+  //   border-top: 1px solid #272727;
+  //   width: 100%;
+  //   margin: 0 auto;
+  // }
 
   &__wrapper {
     max-width: 60%;
@@ -79,9 +79,9 @@ export default {
       max-width: 60%;
     }
 
-    &-about {
-      max-width: 60%;
-    }
+    // &-about {
+    //   max-width: 60%;
+    // }
   }
 
   &__text {
@@ -97,9 +97,9 @@ export default {
       width: 66.3%;
     }
 
-    &-about {
-      width: 66.3%;
-    }
+    // &-about {
+    //   width: 66.3%;
+    // }
   }
 
   &__btn {
@@ -136,11 +136,11 @@ export default {
       }
     }
 
-    &-about {
-      border-top: 1px solid #272727;
-      min-width: initial;
-      margin-left: 0;
-    }
+    // &-about {
+    //   border-top: 1px solid #272727;
+    //   min-width: initial;
+    //   margin-left: 0;
+    // }
 
     &__btn {
       margin-left: auto;

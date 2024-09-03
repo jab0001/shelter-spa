@@ -2,7 +2,7 @@
   <div id="app" :style="isMenuOpen ? 'height: 100vh' : ''">
     <header class="navigation">
       <nav class="navigation__wrapper-desktop">
-        <a class="navigation__logo">
+        <a href='/' class="navigation__logo">
           <img
             class="navigation__logo-img"
             src="../public/icons/logo.svg"
@@ -65,7 +65,7 @@
 
     <div class="footer" v-if="$route.name !== '404'">
       <div class="footer__wrapper">
-        <a class="footer__logo-link" href="">
+        <a class="footer__logo-link" href="/">
           <img
             class="footer__logo-img"
             src="../public/icons/footer-logo.svg"
@@ -162,7 +162,7 @@ export default {
           name: "About",
         },
         {
-          href: "/contact",
+          href: "/get-in-touch",
           name: "Contact",
         },
         {
@@ -246,7 +246,7 @@ export default {
     text-decoration: none;
 
     &:hover {
-      text-decoration: underline;
+      text-decoration: none;
     }
   }
 
@@ -393,7 +393,7 @@ export default {
     text-decoration: none;
 
     &:hover {
-      text-decoration: underline;
+      text-decoration: none;
     }
 
     &-social {

@@ -1,18 +1,15 @@
-# Используем базовый образ Node.js
-FROM node:14-alpine
+FROM node:14-alpine as build
 
-# Установка рабочей директории внутри контейнера
 WORKDIR /app
 
-# Копирование зависимостей и установка их
 COPY package*.json ./
 RUN npm install
 
-# Копирование исходного кода приложения в контейнер
 COPY . .
-
-# Сборка проекта
 RUN npm run build
 
-# Определение команды запуска приложения
-CMD ["npm", "run", "serve"]
+FROM nginx:stable-alpine as production
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+CMD ["nginx", "-g", "daemon off;"]

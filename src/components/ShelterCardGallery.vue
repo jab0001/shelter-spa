@@ -74,9 +74,10 @@ export default {
   width: 100%;
   &__img {
     width: 100%;
-    max-height: 420px;
+    max-height: 600px;
     border-radius: 7px;
-
+    object-fit: contain;
+    
     &-thumbnails {
       width: 60px;
       height: 60px;

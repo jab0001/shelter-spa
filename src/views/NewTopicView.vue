@@ -33,6 +33,21 @@
             @click="(event) => resetValidation(event, 'textTitle')"
             class="new-topic__input new-topic__input-textTitle"
           />
+          <img
+            :src="previewImage"
+            v-if="previewImage"
+            class="uploading-image"
+          />
+          <label class="uploading-label" for="picture">
+            Upload Picture
+            <input
+              type="file"
+              name="picture"
+              id="picture"
+              accept="image/jpeg"
+              @change="uploadImage"
+            />
+          </label>
           <textarea
             ref="textAll"
             type="text"
@@ -99,8 +114,25 @@
             type="text"
             placeholder="Enter key topics and words for your topic"
             v-model="formModel.keywords"
-            class="new-topic__input new-topic__input-keyword"
-        /></label>
+            @blur="addKeyword"
+            @keydown.enter="addKeyword"
+            class="new-topic__input new-topic__input-keyword" />
+          <ul class="new-topic__list" v-if="keywords.length">
+            <li
+              class="new-topic__item"
+              v-for="(keyword, index) in keywords"
+              :key="index"
+              @click="removeKeyword(index)"
+            >
+              {{ keyword }}
+              <img
+                class="new-topic__img"
+                :src="'../icons/close.svg'"
+                alt="close"
+              />
+            </li></ul
+        ></label>
+
         <label
           :class="`new-topic__label new-topic__label-checkbox new-topic__label-checkbox--${!valid.checkbox}`"
         >
@@ -126,6 +158,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "NewTopicView",
 
@@ -141,6 +175,8 @@ export default {
         textTitle: "",
         textAll: "",
       },
+      previewImage: null,
+      keywords: [],
       valid: {
         name: true,
         email: true,
@@ -164,6 +200,29 @@ export default {
   },
 
   methods: {
+    uploadImage(e) {
+      const image = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.onload = (e) => {
+        this.previewImage = e.target.result;
+        console.log(this.previewImage);
+      };
+    },
+
+    addKeyword() {
+      if (this.formModel.keywords !== "") {
+        this.keywords.push(this.formModel.keywords);
+        this.formModel.keywords = "";
+      } else {
+        return;
+      }
+    },
+
+    removeKeyword(id) {
+      this.keywords.splice(id, 1);
+    },
+
     checkEmpty(event, input) {
       event.target.value === "" ? event.target.classList.add("is-invalid") : "";
       event.target.value === ""
@@ -188,11 +247,20 @@ export default {
         .every((el) => el);
     },
 
-    onSubmitHandler() {
+    async onSubmitHandler() {
       const data = {
+        title: this.formModel.textTitle,
         name: this.formModel.name,
         email: this.formModel.email,
-        text: this.formModel.text,
+        text: this.formModel.textAll,
+        date: new Date().toLocaleDateString("en-US", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        }),
+        topic_keywords: this.keywords,
+        themes: [this.formModel.type],
+        image: this.previewImage,
       };
 
       this.isValid();
@@ -202,7 +270,36 @@ export default {
       }
 
       if (this.isValid() && this.isValidEmail === "is-valid" && this.notRobot) {
-        console.log("SUCCESS", data);
+        try {
+          let res = await axios({
+            method: "post",
+            url: `https://backend.help-shelter.com/blog/new`,
+            headers: {
+              "Content-Type": "application/json",
+            },
+            data,
+          });
+
+          console.log(res);
+
+          this.formModel = {
+            name: "",
+            email: "",
+            text: "",
+            type: "All",
+          };
+
+          this.keywords = [];
+
+          this.previewImage = null;
+
+          this.notRobot = false;
+
+          /* return res; */
+        } catch (error) {
+          console.error("Failed to send form:", error);
+        }
+        /* console.log("SUCCESS", data); */
       } else {
         console.log("ERROR");
       }
@@ -212,11 +309,77 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.uploading {
+  &-image {
+    width: auto;
+    height: 50%;
+  }
+
+  &-label {
+    cursor: pointer;
+    padding: 20px 40px;
+    font-family: "Onest";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    input {
+      position: absolute;
+
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      border: 0;
+      padding: 0;
+
+      white-space: nowrap;
+
+      -webkit-clip-path: inset(100%);
+
+      clip-path: inset(100%);
+      clip: rect(0 0 0 0);
+      overflow: hidden;
+    }
+
+    @media (max-width: 900px) {
+      padding: 5px 10px;
+      font-family: "Onest";
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 27px;
+      text-align: center;
+    }
+  }
+}
+
 .new-topic {
   max-width: 1400px;
   margin: 0 auto;
   margin-top: 60px;
   margin-bottom: 200px;
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 8px;
+    margin-top: 8px;
+  }
+
+  &__item {
+    padding: 5px 5px 5px 5px;
+    height: fit-content;
+    font-family: "Onest";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 13px;
+    text-align: left;
+
+    border: 1px solid grey;
+    border-radius: 16px;
+  }
+
+  &__img {
+    height: 12px;
+  }
 
   &__date {
     padding: 40px 40px 0 40px;
@@ -538,7 +701,7 @@ export default {
 
     &__content {
       width: initial;
-      height: 200px;
+      height: initial;
 
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;

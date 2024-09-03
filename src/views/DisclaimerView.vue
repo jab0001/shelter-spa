@@ -2,28 +2,24 @@
   <div class="disclaimer">
     <h2 class="disclaimer__title">Disclaimer</h2>
     <p class="disclaimer__text">
-      The company data available through B2BHint ("company data") comes from
-      many different government sources. In some cases, the source data contain
-      errors that we have not yet detected, and in other cases, the data were
-      provided in very complex formats, which may have led to errors in their
-      presentation on B2BHint.<br /><br />Therefore, we cannot make any promises
-      about the quality of company data. Your use of company data is entirely at
-      your own risk.<br /><br />For this reason, we limit our liability as
-      follows:<br /><br />B2BHint is provided "AS IS" and on an "AS AVAILABLE"
-      basis without any representations or warranties of any kind (express or
-      implied by law) to the extent permitted by law, including implied
-      warranties of satisfactory quality, fitness for a particular purpose,
-      non-infringement, compatibility, security and accuracy.<br /><br />Under
-      no circumstances will we be liable for any of the following losses or
-      damages (whether such losses were foreseen, foreseeable, known or
-      otherwise) (a) loss of data; (b) loss of revenue or anticipated profits;
-      (c) loss of business; (d) loss of opportunity; (e) loss of goodwill or
-      damage to reputation; (f) loss suffered by third parties; or (g) any
-      indirect, consequential, special or exemplary damages arising out of
-      B2BHint, regardless of form of action.<br /><br />We do not warrant that
-      B2BHint content will be uninterrupted or error-free, that defects will be
-      corrected, or that B2BHint or the servers that make it available are free
-      of viruses or bugs.
+      The information provided on the HelpShelter platform ("the platform") is obtained from various 
+      open and publicly available sources, social media accounts of shelters, shelter owners' websites, 
+      Patreon pages, and other similar open sources. While we strive to ensure the accuracy and reliability 
+      of the information presented, we cannot guarantee its completeness, accuracy, or reliability. Your use 
+      of the platform data is entirely at your own risk. <br/> <br> The platform is for information purposes only and 
+      does not constitute professional advice or services. Users of the platform are solely responsible for 
+      verifying the accuracy and reliability of the information presented and should exercise caution and 
+      diligence when relying on it. <br/> <br> In no event shall HelpShelter be liable for any direct, indirect, 
+      incidental, special, or consequential damages arising out of or in any way connected with the use or
+      inability to use the platform or the information presented on it. This includes but is not limited 
+      to damages for loss of profits, data, or goodwill. <br/> <br> The platform is provided on an "as is" and 
+      "as available" basis, without any representations or warranties of any kind, express or implied.
+      HelpShelter disclaims all warranties, including but not limited to the implied warranties of
+      merchantability, fitness for a particular purpose, and non-infringement, compatibility, security
+      and accuracy. <br/> <br> By using the platform, you agree to indemnify and hold HelpShelter from any claims,
+      damages, losses, liabilities, costs, and expenses, including legal fees, arising out of or in any
+      way related to your use of the platform or any violation of these terms. <br/> <br> This disclaimer is 
+      subject to change without notice. Please review it periodically for updates.
     </p>
   </div>
 </template>
@@ -61,13 +57,10 @@ export default {
 
   &__text {
     margin-top: 80px;
-
     font-family: "Onest";
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 400;
     line-height: 30px;
-    letter-spacing: -0.27px;
-
     color: #444444;
     text-align: left;
   }

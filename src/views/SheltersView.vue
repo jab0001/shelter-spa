@@ -31,6 +31,7 @@
                 :id="option"
                 :value="option"
                 v-model="countryFilters"
+                class="filters__tick"
               />
               <label :for="option" class="filters__label">{{ option }}</label>
             </div>
@@ -50,6 +51,7 @@
                 :id="option"
                 :value="option"
                 v-model="typeFilters"
+                class="filters__tick"
               />
               <label :for="option" class="filters__label">{{ option }}</label>
             </div>
@@ -70,12 +72,13 @@
                 name="radio"
                 :value="option"
                 v-model="sizeFilter"
+                class="filters__tick"
               />
               <label :for="option" class="filters__label">{{ option }}</label>
             </div>
           </fieldset>
           <button class="filters__btn" @click.prevent="clearFilters">
-            Clear All
+            Clear all
           </button>
         </form>
       </div>
@@ -101,7 +104,7 @@
             v-for="filter in typeFilters"
             :key="filter"
           >
-            {{ filter }}
+            {{ getFirstWord(filter) }}
             <a
               href=""
               class="cards__item-close"
@@ -119,6 +122,7 @@
             ></a>
           </li>
         </ul>
+        <div v-if="isListEmpty" class="cards__empty-div"></div>
         <!-- DISPLAY CARDS -->
         <ul class="cards__list">
           <li class="cards__item" v-for="card in getShelters" :key="card.id">
@@ -129,6 +133,9 @@
         <button v-if="getTotalPage > page" type="button" class="cards__btn" @click="viewMore">
           View More
         </button>
+
+        <!-- "scroll to the top of page" button for mobile: -->
+        <button class="shelters__button-top-page" @click="scrollToTop"> ↑ </button>
       </div>
     </div>
     <ContactUs
@@ -159,7 +166,7 @@ export default {
       sizeFilter: "",
       openedSettings: true,
       page: 1,
-      cards_on_page: 8,
+      cards_on_page: 10,
     };
   },
   computed: {
@@ -168,6 +175,13 @@ export default {
       getSearchParams: "shelters/getSearchParams",
       getTotalPage: "shelters/getTotalPages",
     }),
+
+    isListEmpty() {
+      if (this.countryFilters.length > 0) return false;
+      if (this.sizeFilter !== "") return false;
+      if (this.typeFilters.length > 0) return false;
+      return true;
+    },
   },
 
   watch: {
@@ -249,9 +263,22 @@ export default {
         },
         add,
       };
+      console.log(data);
       await this.fetchSearchParams();
       await this.fetchShelters(data);
     },
+
+    getFirstWord(str) {
+      return str.split(' ')[0];
+    },
+
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    },
+
   },
 
   async mounted() {
@@ -309,6 +336,25 @@ export default {
       color: #bbbe31;
     }
   }
+ 
+  &__button-top-page {
+    all: unset;
+    background-color: #D1D457;
+    width: 46px;
+    height: 46px;
+    border-radius: 100px;
+    color: #272727;
+    margin-left: auto;
+    font-size: 30px;
+    font-weight: bolder;
+    text-align: center;
+    cursor: pointer;
+    line-height: 46px;
+
+    @media (min-width: 901px) {
+      display: none;
+    }
+  }
 
   @media (max-width: 900px) {
     margin-top: 39px;
@@ -363,6 +409,10 @@ export default {
     &:not(:last-child) {
       margin-bottom: 8px;
     }
+  }
+
+  &__tick {
+    accent-color: #FFC675;
   }
 
   &__legend {
@@ -467,6 +517,7 @@ export default {
   padding-left: 7.1%;
   display: flex;
   flex-wrap: wrap;
+  align-content: baseline;
 
   &__list {
     margin-top: 20px;
@@ -476,10 +527,11 @@ export default {
     width: 100%;
 
     &-search {
-      min-height: 77px;
+      min-height: 78px;
+      max-height: 78px;
       display: flex;
       flex-wrap: wrap;
-      gap: 15px 30px;
+      gap: 6px 16px;
     }
   }
 
@@ -487,9 +539,10 @@ export default {
     width: 300px;
     &-search {
       position: relative;
-      padding: 5px 29px 5px 15px;
+      padding: 10px 30px 10px 16px;
+      align-items: center;
 
-      max-height: 18px;
+      height: 18px;
 
       border: 1.5px solid #272727;
       border-radius: 50px;
@@ -498,13 +551,17 @@ export default {
       font-size: 20px;
       font-weight: 400;
       line-height: 18px;
+      color: #272727;
     }
 
     &-close {
       display: block;
       position: absolute;
-      top: 5px;
-      right: 0;
+      top: 11px;
+      right: 8px;
+      align-items: center;
+      width: 20px;
+      height: auto;
     }
   }
 
@@ -530,6 +587,13 @@ export default {
       background: radial-gradient(#f3c98f, #fff);
     }
   }
+
+  &__empty-div {
+    height: 78px; 
+    width: 100%; 
+    clear: both;
+  }
+
   @media (max-width: 900px) {
     margin-top: 20px;
     padding: 0 37px;

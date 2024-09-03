@@ -65,9 +65,6 @@ export default {
     font-weight: 400;
     line-height: 30px;
     text-align: left;
-
-    letter-spacing: -1.26px;
-
     color: #444444;
   }
 

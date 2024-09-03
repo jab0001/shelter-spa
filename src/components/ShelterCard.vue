@@ -2,24 +2,25 @@
   <div class="card">
     <router-link class="card__link" :to="`/shelters/${item.id}`">
       <img class="card__img" :src="item.picture" alt="Shelter Image" />
-      <!-- <img class="card__img" :src="item.image" alt="Shelter Image" /> -->
       <div class="card__wrapper">
         <h4 class="card__title">
           {{ item.name }}
         </h4>
         <div class="card__inform card__inform-wrapper">
-          <p class="card__inform-text">{{ item.capacity }}</p>
           <ul class="card__inform-list">
             <li
               class="card__inform-item"
               v-for="(type, index) in item.types"
               :key="index"
             >
-              {{ type.toUpperCase() }}
+              {{ getFirstWord(type).toUpperCase() }}
             </li>
           </ul>
         </div>
-        <div class="card__country">{{ item.country }}</div>
+        <div class="card__details">
+          <div class="card__details-country">{{ item.country }}</div>
+          <p class="card__details-capacity">{{ item.capacity }}</p>
+        </div>
       </div>
     </router-link>
   </div>
@@ -41,6 +42,12 @@ export default {
   data() {
     return {};
   },
+
+  methods: {
+    getFirstWord(str) {
+      return str.split(' ')[0];
+    },
+  },
 };
 </script>
 
@@ -56,24 +63,28 @@ export default {
 
   &__title {
     margin-top: 15px;
+    max-width: 300px;
 
     font-family: "Onest";
     font-size: 20px;
     font-weight: 500;
     line-height: 20px;
     letter-spacing: -0.04em;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    min-height: 42px;
   }
 
   &__inform {
-    margin-left: 4px;
-    display: flex;
-    &-wrapper {
-      margin-top: 8px;
-    }
+    margin-top: 8px;
 
     &-list {
       display: flex;
-      margin-left: 16px;
       gap: 16px;
     }
 
@@ -84,19 +95,23 @@ export default {
       border-radius: 19px;
 
       font-family: "Onest";
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 500;
       line-height: 13px;
       letter-spacing: -0.04em;
     }
   }
 
-  &__country {
+  &__details {
     margin-top: 9px;
+    display: flex;
+    &-capacity {
+      margin-left: 16px;
+    }
   }
 
   &__inform,
-  &__country {
+  &__details {
     font-family: "Onest";
     font-size: 18px;
     font-weight: 400;
@@ -117,9 +132,18 @@ export default {
       line-height: 21.6px;
       letter-spacing: -0.04em;
       text-align: left;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      min-height: 22px;
+      color: #272727;
     }
 
-    &__country {
+    &__details {
       margin-top: 5px;
 
       font-size: 14px;

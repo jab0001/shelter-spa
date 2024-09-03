@@ -4,10 +4,10 @@
       <div class="card__wrapper">
         <img :src="`${item.image}`" class="card__preview-image" />
         <div class="card__text-wrapper">
-          <p class="card__date-and-name">{{ item.created_at }} ✦ {{ item.name }}</p>
+          <p class="card__date-and-name">{{ item.date }} ✦ {{ item.name }}</p>
           <h3 class="card__title">{{ item.title }}</h3>
           <p class="card__text">
-            {{ item.content }}
+            {{ item.text }}
           </p>
           <ul class="card__themes">
             <li
